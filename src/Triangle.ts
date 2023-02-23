@@ -11,9 +11,8 @@ export class Triangle extends Shape {
   }
   getType(): string {
     const sameLengthsArray = this.points.map((point, index) =>
-      this.points[index].distance(index === this.points.length - 1 ? this.points[0] : this.points?.[index + 1])
+      Math.round(this.points[index].distance(index === this.points.length - 1 ? this.points[0] : this.points?.[index + 1]) * 100) / 100
     );
-    console.log(sameLengthsArray);
     const result = Array.from(new Set(sameLengthsArray)).length;
     if (result === 1) {
       return "equilateral triangle";
