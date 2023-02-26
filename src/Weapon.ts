@@ -27,11 +27,11 @@ export class Weapon {
     }
     this.baseDurability -= 0.05
     if (this.baseDurability <= 0) {
-      return `You use the ${this.name}, dealing ${this.baseDamage + this.damageModifier} points of damage.\nThe ${
+      return `You use the ${this.name}, dealing ${Weapon.MODIFIER_CHANGE_RATE} points of damage.\nThe ${
         this.name
       } breaks.`;
     }
-    return `You use the ${this.name}, dealing ${this.baseDamage + this.damageModifier} points of damage.`;
+    return `You use the ${this.name}, dealing ${Weapon.MODIFIER_CHANGE_RATE} points of damage.`;
   }
   toString() {
     return `${this.name} − Value: ${this.value.toPrecision(3)}, Weight: ${this.weight.toFixed(2)}, Damage: ${this.getEffectiveDamage().toFixed(2)}, Durability: ${(this.baseDurability * 100).toFixed(2)}%`;
