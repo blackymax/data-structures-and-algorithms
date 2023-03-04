@@ -1,39 +1,39 @@
-export class Weapon {
-  name: string;
-  baseDamage: number;
-  baseDurability: number;
-  value: number;
-  weight: number;
-  static MODIFIER_CHANGE_RATE = 0.05;
-  damageModifier = 0;
+import { Item } from "./Item";
+
+export abstract class Weapon extends Item {
+  public name: string;
+  public baseDamage: number;
+  public baseDurability: number;
+  public value: number;
+  public weight: number;
+  public damageModifier = 0;
+  public static MODIFIER_CHANGE_RATE = 0.05;
   constructor(name: string, baseDamage: number, baseDurability: number, value: number, weight: number) {
-    this.name = name;
+    super(name, value, weight)
     this.baseDamage = baseDamage;
     this.baseDurability = baseDurability;
-    this.value = value;
-    this.weight = weight;
   }
-  getEffectiveDamage() {
+  public getEffectiveDamage(): number {
     return this.baseDamage + this.damageModifier;
   }
-  getEffectiveDurability(): number;
-  getEffectiveDurability(durabilityModifier: number): number;
-  getEffectiveDurability(durabilityModifier = 1) {
+  public getEffectiveDurability(): number;
+  public getEffectiveDurability(durabilityModifier: number): number;
+  public getEffectiveDurability(durabilityModifier = 1): number {
     return this.baseDurability / durabilityModifier;
   }
-  use() {
+  public use(): string {
     if (this.baseDurability <= 0) {
       return `You can't use the ${this.name}, it is broken.`;
     }
-    this.baseDurability -= 0.05
+    this.baseDurability -= 0.05;
     if (this.baseDurability <= 0) {
-      return `You use the ${this.name}, dealing ${Weapon.MODIFIER_CHANGE_RATE} points of damage.\nThe ${
-        this.name
-      } breaks.`;
+      return `You use the ${this.name}, dealing ${Weapon.MODIFIER_CHANGE_RATE} points of damage.\nThe ${this.name} breaks.`;
     }
     return `You use the ${this.name}, dealing ${Weapon.MODIFIER_CHANGE_RATE} points of damage.`;
   }
-  toString() {
-    return `${this.name} − Value: ${this.value.toPrecision(3)}, Weight: ${this.weight.toFixed(2)}, Damage: ${this.getEffectiveDamage().toFixed(2)}, Durability: ${(this.baseDurability * 100).toFixed(2)}%`;
+  public toString(): string {
+    return `${this.name} − Value: ${this.value.toPrecision(3)}, Weight: ${this.weight.toFixed(
+      2
+    )}, Damage: ${this.getEffectiveDamage().toFixed(2)}, Durability: ${(this.baseDurability * 100).toFixed(2)}%`;
   }
 }

@@ -7,10 +7,10 @@ export class Pizza extends Consumable {
     super("pizza", value, weight, isSpoiled);
     this.numberOfSlices = numberOfSlices;
   }
-  getNumberOfEatenSlices() {
+  public getNumberOfEatenSlices(): number {
     return this.numberOfEatenSlices;
   }
-  use() {
+  public use(): string {
     if (this.numberOfSlices - this.numberOfEatenSlices) {
       this.numberOfEatenSlices += 1;
       return `You consumed a slice of the ${this.name}.`;
