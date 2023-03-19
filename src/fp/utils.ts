@@ -44,11 +44,7 @@ export function pipe<A, B, C, D, E>(
   fe: (d: D) => E
 ): E;
 export function pipe(a: any, ...fns: Array<(...args: Array<any>) => any>) {
-  const [currentFunc, ...restFunctions] = fns;
-  if (restFunctions?.length > 0) {
-    return pipe.apply(null, [currentFunc(a), ...restFunctions]);
-  }
-  return currentFunc(a);
+  return fns.reduce((acc, fn) => fn(acc), a);
 }
 
 export type Predicate<A> = (a: A) => boolean;
